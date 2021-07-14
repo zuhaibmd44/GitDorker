@@ -126,7 +126,7 @@ if not args.dorks and not args.keyword:
     parser.error('dorks file or keyword is missing')
 
 # NUMBER OF REQUESTS PER MINUTE (TOKENS MUST BE UNIQUE)
-requests_per_minute = (len(tokens_list) * 30) - 1
+requests_per_minute = (len(tokens_list) * 10) - 1
 
 # TOKEN ROUND ROBIN
 n = -1
@@ -176,7 +176,7 @@ def api_search(url):
                     sys.stdout.flush()
                     time.sleep(1)
         else:
-            if stats_dict['n_current'] % 29 == 0:
+            if stats_dict['n_current'] % 10 == 0:
                 for remaining in range(63, 0, -1):
                     sys.stdout.write("\r")
                     sys.stdout.write(colored(
@@ -315,7 +315,7 @@ sys.stdout.write(colored('[#] running %d threads.\n' % threads, 'cyan'))
 if args.limitbypass:
     sys.stdout.write(colored('[#] %d requests per minute allowed\n' % requests_per_minute, 'cyan'))
 else:
-    sys.stdout.write(colored('[#] 29 requests per minute allowed\n', 'cyan'))
+    sys.stdout.write(colored('[#] 10 requests per minute allowed\n', 'cyan'))
 print("")
 # SLEEP
 time.sleep(1)
