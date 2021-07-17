@@ -126,7 +126,7 @@ if not args.dorks and not args.keyword:
     parser.error('dorks file or keyword is missing')
 
 # NUMBER OF REQUESTS PER MINUTE (TOKENS MUST BE UNIQUE)
-requests_per_minute = (len(tokens_list) * 10) - 1
+requests_per_minute = (len(tokens_list) * 30) - 1
 
 # TOKEN ROUND ROBIN
 n = -1
@@ -222,7 +222,7 @@ for query in queries_list:
                 dork = "{}".format(query) + " " + dork
             else:
                 dork = "{}".format(query) + " " + dork
-            url = 'https://api.github.com/search/code?q=' + __urlencode(dork)
+            url = 'https://api.github.com/search/code?q=org:' + __urlencode(dork)
             results_dict[query].append(url)
             url_dict[url] = 0
         else:
@@ -230,7 +230,7 @@ for query in queries_list:
                 dork = "{}".format(query) + " " + dork + patternfilter
             else:
                 dork = "{}".format(query) + " " + dork + patternfilter
-            url = 'https://api.github.com/search/code?q=' + __urlencode(dork)
+            url = 'https://api.github.com/search/code?q=org:' + __urlencode(dork)
             results_dict[query].append(url)
             url_dict[url] = 0
 
@@ -242,12 +242,12 @@ for organization in organizations_list:
     for dork in dorks_list:
         if not args.patternfilter:
             dork = 'org:' + organization + ' ' + dork
-            url = 'https://api.github.com/search/code?q=' + __urlencode(dork)
+            url = 'https://api.github.com/search/code?q=org:' + __urlencode(dork)
             results_dict[organization].append(url)
             url_dict[url] = 0
         else:
             dork = 'org:' + organization + ' ' + dork + patternfilter
-            url = 'https://api.github.com/search/code?q=' + __urlencode(dork)
+            url = 'https://api.github.com/search/code?q=org:' + __urlencode(dork)
             results_dict[organization].append(url)
             url_dict[url] = 0
 
@@ -260,12 +260,12 @@ for user in users_list:
                 for keyword in keywords_list:
                     if not args.patternfilter:
                         keyword_dork = 'user:' + user + ' ' + keyword + ' ' + dork
-                        url = 'https://api.github.com/search/code?q=' + __urlencode(keyword_dork)
+                        url = 'https://api.github.com/search/code?q=org:' + __urlencode(keyword_dork)
                         results_dict[user].append(url)
                         url_dict[url] = 0
                     else:
                         keyword_dork = 'user:' + user + ' ' + keyword + ' ' + dork + patternfilter
-                        url = 'https://api.github.com/search/code?q=' + __urlencode(keyword_dork)
+                        url = 'https://api.github.com/search/code?q=org:' + __urlencode(keyword_dork)
                         results_dict[user].append(url)
                         url_dict[url] = 0
 
@@ -273,12 +273,12 @@ for user in users_list:
         for dork in dorks_list:
             if not args.patternfilter:
                 dork = 'user:' + user + ' ' + dork
-                url = 'https://api.github.com/search/code?q=' + __urlencode(dork)
+                url = 'https://api.github.com/search/code?q=org:' + __urlencode(dork)
                 results_dict[user].append(url)
                 url_dict[url] = 0
             else:
                 dork = 'user:' + user + ' ' + dork + patternfilter
-                url = 'https://api.github.com/search/code?q=' + __urlencode(dork)
+                url = 'https://api.github.com/search/code?q=org:' + __urlencode(dork)
                 results_dict[user].append(url)
                 url_dict[url] = 0
 
@@ -286,12 +286,12 @@ for user in users_list:
         for keyword in keywords_list:
             if not args.patternfilter:
                 keyword = 'user:' + user + ' ' + keyword
-                url = 'https://api.github.com/search/code?q=' + __urlencode(keyword)
+                url = 'https://api.github.com/search/code?q=org:' + __urlencode(keyword)
                 results_dict[user].append(url)
                 url_dict[url] = 0
             else:
                 keyword = 'user:' + user + ' ' + keyword + patternfilter
-                url = 'https://api.github.com/search/code?q=' + __urlencode(keyword)
+                url = 'https://api.github.com/search/code?q=org:' + __urlencode(keyword)
                 results_dict[user].append(url)
                 url_dict[url] = 0
 
